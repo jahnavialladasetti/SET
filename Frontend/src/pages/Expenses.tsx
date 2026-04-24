@@ -66,7 +66,7 @@ const Expenses = () => {
             <h3 className="text-xl font-semibold mb-6 text-slate-200">Add New Expense</h3>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-slate-400 mb-1.5">Amount ($)</label>
+                <label className="block text-sm font-medium text-slate-400 mb-1.5">Amount (₹)</label>
                 <input
                   type="number"
                   step="0.01"
@@ -132,7 +132,7 @@ const Expenses = () => {
                       </div>
                     </div>
                     <div className="flex items-center gap-6">
-                      <p className="font-bold text-slate-200">${expense.amount.toFixed(2)}</p>
+                      <p className="font-bold text-slate-200">₹{expense.amount.toFixed(2)}</p>
                       <button 
                         onClick={() => handleDelete(expense.id)}
                         className="text-slate-500 hover:text-red-400 opacity-0 group-hover:opacity-100 transition-all"

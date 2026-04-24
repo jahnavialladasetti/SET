@@ -70,7 +70,7 @@ const Dashboard = () => {
             </div>
             <h3 className="text-lg font-medium text-slate-300">Total Expenses</h3>
           </div>
-          <p className="text-4xl font-bold text-slate-100">${totalExpenses.toFixed(2)}</p>
+          <p className="text-4xl font-bold text-slate-100">₹{totalExpenses.toFixed(2)}</p>
         </div>
 
         <div className="bg-slate-800/40 backdrop-blur-md border border-slate-700/50 rounded-2xl p-6 shadow-xl relative overflow-hidden group">
@@ -81,7 +81,7 @@ const Dashboard = () => {
             </div>
             <h3 className="text-lg font-medium text-slate-300">Monthly Subs</h3>
           </div>
-          <p className="text-4xl font-bold text-slate-100">${totalMonthlySubs.toFixed(2)}</p>
+          <p className="text-4xl font-bold text-slate-100">₹{totalMonthlySubs.toFixed(2)}</p>
           <p className="text-sm text-slate-500 mt-2">Active fixed costs</p>
         </div>
 
@@ -151,7 +151,7 @@ const Dashboard = () => {
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="font-bold text-slate-200">${sub.amount.toFixed(2)}</p>
+                    <p className="font-bold text-slate-200">₹{sub.amount.toFixed(2)}</p>
                     <p className="text-xs text-slate-500 capitalize">{sub.billing_cycle}</p>
                   </div>
                 </div>

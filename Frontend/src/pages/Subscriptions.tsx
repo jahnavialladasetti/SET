@@ -77,7 +77,7 @@ const Subscriptions = () => {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-400 mb-1.5">Amount ($)</label>
+                <label className="block text-sm font-medium text-slate-400 mb-1.5">Amount (₹)</label>
                 <input
                   type="number"
                   step="0.01"
@@ -166,7 +166,7 @@ const Subscriptions = () => {
                       
                       <h4 className="text-xl font-bold text-slate-200 mb-1">{sub.name}</h4>
                       <p className="text-2xl font-light text-slate-100 mb-4">
-                        ${sub.amount.toFixed(2)} <span className="text-sm text-slate-500">/{sub.billing_cycle === 'monthly' ? 'mo' : 'yr'}</span>
+                        ₹{sub.amount.toFixed(2)} <span className="text-sm text-slate-500">/{sub.billing_cycle === 'monthly' ? 'mo' : 'yr'}</span>
                       </p>
                       
                       <div className="flex items-center gap-2 text-sm text-slate-400 bg-slate-950/50 p-2.5 rounded-lg">
