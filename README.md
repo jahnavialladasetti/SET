@@ -51,4 +51,3 @@ The application will be live at `http://localhost:5173`.
 
 ---
 
-*Built with passion and a focus on clean, scalable engineering.*
