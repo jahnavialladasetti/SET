@@ -4,13 +4,17 @@ import api from '../api';
 interface User {
   id: number;
   email: string;
+  name?: string;
+  monthly_budget: number;
+  currency: string;
 }
 
 interface AuthContextType {
   user: User | null;
   loading: boolean;
-  login: (token: string) => Promise<void>;
+  login: (accessToken: string, refreshToken: string) => Promise<void>;
   logout: () => void;
+  updateUserProfile: (data: Partial<User>) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -37,18 +41,30 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     fetchUser();
   }, []);
 
-  const login = async (token: string) => {
-    localStorage.setItem('token', token);
+  const login = async (accessToken: string, refreshToken: string) => {
+    localStorage.setItem('token', accessToken);
+    localStorage.setItem('refreshToken', refreshToken);
     await fetchUser();
   };
 
   const logout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('refreshToken');
     setUser(null);
   };
 
+  const updateUserProfile = async (data: Partial<User>) => {
+    try {
+      const response = await api.put('/auth/me', data);
+      setUser(response.data);
+    } catch (error) {
+      console.error("Failed to update user profile", error);
+      throw error;
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, loading, login, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, logout, updateUserProfile }}>
       {children}
     </AuthContext.Provider>
   );

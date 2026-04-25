@@ -1,18 +1,26 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.util import get_remote_address
+from slowapi.errors import RateLimitExceeded
+
 from database import engine, Base
 import models
-from routers import auth, expenses, subscriptions
+from routers import auth, expenses, subscriptions, goals
+from limiter import limiter
 
 # Create the database tables
 models.Base.metadata.create_all(bind=engine)
 
-app = FastAPI(title="SpendSense API")
+app = FastAPI(title="SET API")
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 # Configure CORS
 origins = [
-    "http://localhost:5173", # Vite default port
-    "*" # Update this for production
+    "http://localhost:5173",  # Vite default port
+    "http://localhost:5174",  # Vite fallback port
+    "http://localhost:3000",  # alternate dev port
 ]
 
 app.add_middleware(
@@ -26,7 +34,9 @@ app.add_middleware(
 app.include_router(auth.router, prefix="/api/auth", tags=["auth"])
 app.include_router(expenses.router, prefix="/api/expenses", tags=["expenses"])
 app.include_router(subscriptions.router, prefix="/api/subscriptions", tags=["subscriptions"])
+app.include_router(goals.router, prefix="/api/goals", tags=["goals"])
 
 @app.get("/")
-def read_root():
-    return {"message": "Welcome to SpendSense API"}
+@limiter.limit("5/minute")
+async def read_root(request: Request):
+    return {"message": "Welcome to SET API"}
