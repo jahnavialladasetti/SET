@@ -1,8 +1,10 @@
 import axios from 'axios';
 
+const rawBaseURL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+const baseURL = rawBaseURL.endsWith('/api') ? rawBaseURL : `${rawBaseURL.replace(/\/$/, '')}/api`;
+
 const api = axios.create({
-  // Automatically use the Vercel env variable if deployed, otherwise fallback to local backend
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8000', 
+  baseURL: baseURL,
 });
 
 // Attach token to every request
@@ -26,7 +28,8 @@ api.interceptors.response.use(
       
       if (refreshToken) {
         try {
-          const baseURL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+          const rawBaseURL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+          const baseURL = rawBaseURL.endsWith('/api') ? rawBaseURL : `${rawBaseURL.replace(/\/$/, '')}/api`;
           const response = await axios.post(`${baseURL}/auth/refresh`, {
             refresh_token: refreshToken
           });
