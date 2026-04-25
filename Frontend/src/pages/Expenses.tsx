@@ -4,7 +4,6 @@ import { Plus, Trash2, Edit2, CheckCircle2 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { formatCurrency } from '../utils';
 import { format, parseISO } from 'date-fns';
-import { useTheme } from '../contexts/ThemeContext';
 import toast from 'react-hot-toast';
 import { Download, Receipt } from 'lucide-react';
 

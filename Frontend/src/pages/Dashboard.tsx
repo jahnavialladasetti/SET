@@ -47,7 +47,6 @@ const Dashboard = () => {
 
   const totalExpenses = allExpenses.reduce((acc, curr) => acc + curr.amount, 0);
   const totalIncome = allIncomes.reduce((acc, curr) => acc + curr.amount, 0);
-  const totalMonthlySubs = subscriptions.filter(s => s.billing_cycle === 'monthly').reduce((acc, curr) => acc + curr.amount, 0);
   
   // Current Month calculations for budget
   const today = new Date();
@@ -279,7 +278,7 @@ const Dashboard = () => {
                       <RechartsTooltip 
                         contentStyle={{ backgroundColor: theme === 'dark' ? '#1e293b' : '#ffffff', borderColor: theme === 'dark' ? '#334155' : '#e2e8f0', borderRadius: '0.75rem', color: theme === 'dark' ? '#f1f5f9' : '#0f172a' }}
                         itemStyle={{ color: theme === 'dark' ? '#f1f5f9' : '#0f172a' }}
-                        formatter={(value: number) => formatCurrency(value, currency)}
+                        formatter={(value: any) => formatCurrency(Number(value), currency)}
                       />
                     </PieChart>
                   </ResponsiveContainer>

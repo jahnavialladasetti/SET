@@ -1,6 +1,5 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
-import { Wallet, PieChart, ShieldCheck, ArrowRight, TrendingUp, Bell } from 'lucide-react';
+import { Wallet, PieChart, ArrowRight, TrendingUp, Bell } from 'lucide-react';
 
 const Landing = () => {
   return (

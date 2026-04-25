@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import api from '../api';
 import { Plus, Trash2, Edit2, CheckCircle2, AlertTriangle, CreditCard } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
-import { useTheme } from '../contexts/ThemeContext';
 import { formatCurrency } from '../utils';
 import toast from 'react-hot-toast';
 import { Download } from 'lucide-react';

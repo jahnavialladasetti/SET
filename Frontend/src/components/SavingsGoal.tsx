@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import api from '../api';
-import { Target, TrendingUp, Plus, Trash2, Edit2, CheckCircle2 } from 'lucide-react';
+import { Target, Plus, Trash2 } from 'lucide-react';
 import { formatCurrency } from '../utils';
 import toast from 'react-hot-toast';
 
